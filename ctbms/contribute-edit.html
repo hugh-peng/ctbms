@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>修改稿件信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/xadmin.css">
+    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+</head>
+<body>
+    <div class="layui-fluid">
+        <div class="layui-row">
+            <form class="layui-form" name="formEdit" method="post" action="contribute-edit.php">
+                <div style="color: gray">
+                    <h3>稿件信息修改</h3>
+                </div>
+                <hr>
+                <div class="layui-form-item">
+                    <label for="cname" class="layui-form-label">
+                        <span class="x-red">*</span>稿件名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="cname" name="cname" readonly class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">将会成为您更改其他信息的依据</div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>选择修改项
+                    </label>
+                    <div class="layui-input-inline">
+                        <select name="choose">
+                            <option value="cauthor" selected>作者</option>
+                            <option value="caunum">作者编号</option>
+                            <option value="cpauthor">通信作者</option>
+                            <option value="ckey">关键词</option>
+                            <option value="chinese">中文摘要</option>
+                            <option value="english">英文摘要</option>
+                            <option value="spon">资助项目</option>
+                        </select>
+                    </div>
+                    <div class="layui-word-aux">根据选择的修改项选择下面其中1个的输入框即可</div>
+                </div>
+
+                <div class="layui-form-item" id="fornew">
+                    <label class="layui-form-label">新值</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="new" name="new" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">新摘要:</label>
+                    <div class="layui-input-block">
+                        <textarea id="newt" name="newt" placeholder="新摘要(200字以内)" lay-verify="TextLength" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label"></label>
+                    <button class="layui-btn" lay-filter="go" lay-submit="">提交</button></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        layui.use(['form', 'layer'], function() {
+            $ = layui.jquery;
+            var form = layui.form,
+                layer = layui.layer;
+
+            //验证输入框的合法性
+            form.verify({
+                TextLength: function (value) {
+                    if (value.length>200){
+                        return '请控制摘要少于200字';
+                    }
+                }
+            });
+
+            //监听提交
+            form.on('submit(go)', function(data) {
+                if ($("#new").val() == '' && $("#newt").val()== ''){
+                    layer.alert("修改的值不能都为空！");
+                }else {
+                    //把数据提交给php
+                    //触发表单提交
+                    return true;
+                    /*
+                    layer.alert("修改成功", {icon: 6}, function() {
+                        // 获得frame索引
+                        var index = parent.layer.getFrameIndex(window.name);
+                        //关闭当前frame
+                        parent.layer.close(index);
+                    });
+                    */
+
+                }
+
+                return false;
+            });
+
+        });
+
+    </script>
+</body>
+</html>

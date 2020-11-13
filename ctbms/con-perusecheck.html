@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>审阅</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/xadmin.css">
+    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form" method="post" action="con-perusecheck.php">
+            <div style="color: gray">
+                <h3>审阅稿件-验证审稿人</h3>
+            </div>
+            <hr>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">稿件名称:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="cname" name="cname" readonly class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    <span class="x-red">*</span>审稿人姓名:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="rname" lay-verify="required" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    <span class="x-red">*</span>审稿人邮箱:</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="remail" lay-verify="required" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    <span class="x-red">*</span>是否录用稿件
+                </label>
+                <div class="layui-input-block">
+                    <label><input type="radio" name="check" value="录用" title="录用" checked></label>
+                    <label><input type="radio" name="check" value="放弃" title="放弃" ></label>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <button class="layui-btn" lay-filter="go" lay-submit="">提交</button></div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    layui.use(['form', 'layer'], function() {
+        $ = layui.jquery;
+        var form = layui.form,
+            layer = layui.layer;
+
+        //验证输入框的合法性
+        form.verify({
+
+        });
+
+        //监听提交
+        form.on('submit(go)', function(data) {
+            //触发表单提交
+            return true;
+        });
+
+    });
+
+</script>
+</body>
+</html>
